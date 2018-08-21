@@ -1,0 +1,243 @@
+* {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+BODY {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 20px 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT: 0.72em/1.5em 'Trebuchet MS', sans-serif; BACKGROUND: #6d5434; HEIGHT: 100%; COLOR: #444; PADDING-TOP: 0px
+}
+A {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #993333; TEXT-DECORATION: none
+}
+A:hover {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #006699; TEXT-DECORATION: underline
+}
+H1 {
+	FONT: bold 1em 'Trebuchet MS', Tahoma, Sans-serif; COLOR: #333
+}
+H2 {
+	FONT: bold 1em 'Trebuchet MS', Tahoma, Sans-serif; COLOR: #333
+}
+H3 {
+	FONT: bold 1em 'Trebuchet MS', Tahoma, Sans-serif; COLOR: #333
+}
+H1 {
+	FONT-SIZE: 1.4em
+}
+H2 {
+	TEXT-TRANSFORM: uppercase; FONT-SIZE: 1.2em
+}
+H3 {
+	FONT-SIZE: 1.2em
+}
+P {
+	MARGIN: 10px 15px
+}
+H1 {
+	MARGIN: 10px 15px
+}
+H2 {
+	MARGIN: 10px 15px
+}
+H3 {
+	MARGIN: 10px 15px
+}
+UL {
+	PADDING-BOTTOM: 0px; MARGIN: 10px 30px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; PADDING-TOP: 0px
+}
+OL {
+	PADDING-BOTTOM: 0px; MARGIN: 10px 30px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; PADDING-TOP: 0px
+}
+IMG {
+	BORDER-BOTTOM: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #fff; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; BORDER-TOP: #ddd 1px solid; BORDER-RIGHT: #ddd 1px solid; PADDING-TOP: 5px
+}
+IMG.float-right {
+	MARGIN: 5px 0px 5px 15px
+}
+IMG.float-left {
+	MARGIN: 5px 15px 5px 0px
+}
+CODE {
+	BORDER-BOTTOM: #eee 1px solid; TEXT-ALIGN: left; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 10px; MARGIN: 5px 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; DISPLAY: block; FONT: 500 1em/1.5em 'Lucida Console', 'courier new', monospace; BACKGROUND: #fafafa; OVERFLOW: auto; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 10px
+}
+ACRONYM {
+	BORDER-BOTTOM: #777 1px solid; CURSOR: help
+}
+BLOCKQUOTE {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 0px; MARGIN: 15px; PADDING-LEFT: 20px; PADDING-RIGHT: 0px; FONT: bold 1.2em/1.5em 'Trebuchet MS', Tahoma, sans-serif; BACKGROUND: url(quote.gif) #fafafa no-repeat 3px 5px; COLOR: #666666; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 0px
+}
+TABLE {
+	MARGIN: 15px; BORDER-COLLAPSE: collapse
+}
+TH STRONG {
+	COLOR: #fff
+}
+TH {
+	BORDER-BOTTOM: #fff 2px solid; TEXT-ALIGN: left; BORDER-LEFT: #d68686 1px solid; PADDING-LEFT: 12px; PADDING-RIGHT: 12px; BACKGROUND: #993333; HEIGHT: 29px; COLOR: #fff
+}
+TR {
+	HEIGHT: 30px
+}
+TD {
+	BORDER-BOTTOM: #dfdfdf 1px solid; BORDER-LEFT: #e8e8e8 1px solid; PADDING-LEFT: 11px; PADDING-RIGHT: 11px
+}
+TD.first {
+	BORDER-LEFT: 0px
+}
+TH.first {
+	BORDER-LEFT: 0px
+}
+TR.row-a {
+	BACKGROUND: #f8f8f8
+}
+TR.row-b {
+	BACKGROUND: #efefef
+}
+FORM {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #fafafa; MARGIN: 10px 15px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 0px
+}
+LABEL {
+	MARGIN: 5px 0px; DISPLAY: block; FONT-WEIGHT: bold
+}
+INPUT {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; FONT: 1em 'Trebuchet MS', verdana, sans-serif; COLOR: #777; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 2px
+}
+TEXTAREA {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; WIDTH: 400px; PADDING-RIGHT: 2px; DISPLAY: block; FONT: 1em 'Trebuchet MS', verdana, sans-serif; HEIGHT: 100px; COLOR: #777; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 2px
+}
+INPUT.button {
+	BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; FONT: bold 1em Arial, Sans-serif; BACKGROUND: #fff; COLOR: #333; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid; PADDING-TOP: 2px
+}
+.searchform {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: transparent; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 0px
+}
+.searchform P {
+	PADDING-BOTTOM: 0px; MARGIN: 10px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.searchform INPUT.textbox {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; WIDTH: 130px; PADDING-RIGHT: 2px; HEIGHT: 20px; COLOR: #333; VERTICAL-ALIGN: top; PADDING-TOP: 2px
+}
+.searchform INPUT.button {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; PADDING-BOTTOM: 3px; PADDING-LEFT: 5px; WIDTH: 60px; PADDING-RIGHT: 5px; FONT: bold 12px Arial, Sans-serif; HEIGHT: 26px; COLOR: #333; VERTICAL-ALIGN: top; BORDER-TOP: medium none; BORDER-RIGHT: medium none; PADDING-TOP: 3px
+}
+#wrap {
+	MARGIN: 0px auto; WIDTH: 970px; BACKGROUND: url(wrap-bg.jpg) #fff repeat-y
+}
+#header {
+	POSITION: relative; TEXT-ALIGN: left; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND: #fff; HEIGHT: 156px; PADDING-TOP: 0px
+}
+#header .headerphoto {
+	POSITION: absolute; WIDTH: 720px; BACKGROUND: url(testpapers.png) #fff no-repeat; HEIGHT: 136px; RIGHT: 15px; TOP: 15px
+}
+#header #logo-box {
+	POSITION: absolute; WIDTH: 200px; BACKGROUND: #4e3525; HEIGHT: 136px; TOP: 15px; LEFT: 15px
+}
+#logo-box H1#logo {
+	POSITION: absolute; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; LETTER-SPACING: -2px; PADDING-RIGHT: 0px; FONT: bold 50px 'Trebuchet MS', Sans-serif; COLOR: #fff; PADDING-TOP: 0px; TOP: 5px; LEFT: 34px
+}
+#logo-box H1#logo A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+#logo-box #slogan {
+	POSITION: absolute; PADDING-BOTTOM: 0px; TEXT-TRANSFORM: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT: bold 12px 'Trebuchet Ms', Sans-serif; COLOR: #ffffcc; PADDING-TOP: 0px; TOP: 88px; LEFT: 60px
+}
+#menu {
+	PADDING-BOTTOM: 10px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 970px; PADDING-RIGHT: 0px; BACKGROUND: url(wrap-bg.jpg) #fff repeat-y; FLOAT: left; CLEAR: both; PADDING-TOP: 0px
+}
+#menu UL {
+	BORDER-BOTTOM: #fff 6px solid; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #4e3525; MARGIN: 0px 15px; PADDING-LEFT: 0px; WIDTH: 940px; PADDING-RIGHT: 0px; DISPLAY: inline; FONT: bolder 14px 'Trebuchet MS', sans-serif; FLOAT: left; COLOR: #fff; PADDING-TOP: 0px
+}
+#menu LI {
+	LIST-STYLE-TYPE: none; FLOAT: left
+}
+#menu LI A {
+	PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; DISPLAY: block; COLOR: #fff; TEXT-DECORATION: none; PADDING-TOP: 5px
+}
+#menu LI A:hover {
+	BACKGROUND: #c8935d; COLOR: #fff
+}
+#menu LI A#current {
+	BACKGROUND: #993333; COLOR: #fff
+}
+#content-wrap {
+	WIDTH: 100%; BACKGROUND: url(content.jpg) #fff repeat-y; FLOAT: left; CLEAR: both
+}
+#content {
+	TEXT-ALIGN: left; PADDING-BOTTOM: 0px; MARGIN: 0px auto; PADDING-LEFT: 0px; WIDTH: 940px; PADDING-RIGHT: 0px; CLEAR: both; PADDING-TOP: 0px
+}
+#sidebar {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 10px; PADDING-LEFT: 0px; WIDTH: 20%; PADDING-RIGHT: 0px; FLOAT: right; PADDING-TOP: 0px
+}
+#sidebar H1 {
+	PADDING-BOTTOM: 5px; MARGIN: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 0px; COLOR: #660000; PADDING-TOP: 10px
+}
+.sidebox {
+	MARGIN-BOTTOM: 10px
+}
+#sidebar UL.sidemenu {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 10px 0px 15px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+#sidebar UL.sidemenu LI {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; PADDING-TOP: 0px
+}
+#sidebar UL.sidemenu A {
+	BORDER-BOTTOM: #d5d5d5 1px dashed; PADDING-BOTTOM: 0.3em; LINE-HEIGHT: 1.5em; PADDING-LEFT: 15px; PADDING-RIGHT: 0px; DISPLAY: block; HEIGHT: 1.5em; COLOR: #333; FONT-WEIGHT: normal; TEXT-DECORATION: none; PADDING-TOP: 0.3em
+}
+#sidebar UL.sidemenu A.top {
+	BORDER-TOP: #d5d5d5 1px dashed
+}
+#sidebar UL.sidemenu A:hover {
+	BORDER-LEFT: #993333 5px solid; PADDING-BOTTOM: 0.3em; PADDING-LEFT: 10px; PADDING-RIGHT: 0px; COLOR: #993333; PADDING-TOP: 0.3em
+}
+#main {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 10px; PADDING-LEFT: 0px; WIDTH: 67%; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+#main H1 {
+	BORDER-BOTTOM: #d5d5d5 1px dashed; PADDING-BOTTOM: 5px; MARGIN: 0px 0px 0px 10px; PADDING-LEFT: 5px; PADDING-RIGHT: 0px; PADDING-TOP: 10px
+}
+#main UL LI {
+	LIST-STYLE-IMAGE: url(bullet.gif)
+}
+.post {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.post .post-footer {
+	BORDER-BOTTOM: #eee 1px solid; BORDER-LEFT: #eee 1px solid; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #fafafa; MARGIN-TOP: 20px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; FONT-SIZE: 95%; BORDER-TOP: #eee 1px solid; BORDER-RIGHT: #eee 1px solid; PADDING-TOP: 5px
+}
+.post .post-footer .date {
+	MARGIN: 0px 10px 0px 5px; PADDING-LEFT: 20px; BACKGROUND: url(clock.gif) no-repeat 0px center
+}
+.post .post-footer .comments {
+	MARGIN: 0px 10px 0px 5px; PADDING-LEFT: 20px; BACKGROUND: url(comment.gif) no-repeat 0px center
+}
+.post .post-footer .readmore {
+	MARGIN: 0px 10px 0px 5px; PADDING-LEFT: 20px; BACKGROUND: url(page.gif) no-repeat 0px center
+}
+#footer {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT: 0.92em/1.5em 'Trebuchet MS', Tahoma, Arial, sans-serif; BACKGROUND: url(footer-bg.jpg) no-repeat left bottom; HEIGHT: 45px; COLOR: #666666; CLEAR: both; PADDING-TOP: 12px
+}
+#footer P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+#footer A {
+	COLOR: #777; TEXT-DECORATION: none
+}
+#footer A:hover {
+	COLOR: #333; TEXT-DECORATION: underline
+}
+.float-left {
+	FLOAT: left
+}
+.float-right {
+	FLOAT: right
+}
+.align-left {
+	TEXT-ALIGN: left
+}
+.align-right {
+	TEXT-ALIGN: right
+}
+.clear {
+	CLEAR: both
+}
+.gray {
+	COLOR: #bfbfbf
+}

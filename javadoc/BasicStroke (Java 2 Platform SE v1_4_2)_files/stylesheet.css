@@ -1,0 +1,42 @@
+body {
+	background-color: rgb(255, 255, 255);
+}
+h1 {
+	font-size: 145%;
+}
+.TableHeadingColor {
+	background: rgb(204, 204, 255);
+}
+.TableSubHeadingColor {
+	background: rgb(238, 238, 255);
+}
+.TableRowColor {
+	background: rgb(255, 255, 255);
+}
+.FrameTitleFont {
+	font-family: Helvetica, Arial, sans-serif; font-size: 100%;
+}
+.FrameHeadingFont {
+	font-family: Helvetica, Arial, sans-serif; font-size: 90%;
+}
+.FrameItemFont {
+	font-family: Helvetica, Arial, sans-serif; font-size: 90%;
+}
+.NavBarCell1 {
+	background-color: rgb(238, 238, 255);
+}
+.NavBarCell1Rev {
+	background-color: rgb(0, 0, 139);
+}
+.NavBarFont1 {
+	color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif;
+}
+.NavBarFont1Rev {
+	color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif;
+}
+.NavBarCell2 {
+	font-family: Arial, Helvetica, sans-serif; background-color: rgb(255, 255, 255);
+}
+.NavBarCell3 {
+	font-family: Arial, Helvetica, sans-serif; background-color: rgb(255, 255, 255);
+}

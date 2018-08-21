@@ -1,0 +1,1594 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0059)http://www.java-samples.com/showtutorial.php -->
+<HTML><HEAD><TITLE>wait(), notify() and notifyAll() in Java - A tutorial</TITLE>
+<META name=Description 
+content="To avoid polling, Java includes an elegant interrocess communication mechanism via the wait( ), notify( ), and notifyAll( ) methods. These methods are implemented as final methods in Object, so all classes have them. All three methods can be called only from within a synchronized method. Although conceptually advanced from a computer science perspective, the rules for using these methods are actually quite simple:">
+<META name=Keywords 
+content="wait(), notify() and notifyAll() in Java - A tutorial">
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<META name=Distribution content=Global>
+<META name=Robots content=index,follow><LINK rel=stylesheet type=text/css 
+href="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/Enlighten.css">
+<SCRIPT type=text/javascript 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/plusone.js"></SCRIPT>
+
+<META name=GENERATOR content="MSHTML 9.00.8112.16443"></HEAD>
+<BODY leftMargin=0 topMargin=0 bgColor=#69422c marginheight="0" marginwidth="0"><!-- wrap starts here -->
+<DIV id=wrap>
+<DIV id=header>
+<DIV id=logo-box>
+<P align=center><A href="http://www.java-samples.com/index.php"><IMG border=0 
+alt="Java samples" 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/java-samples.jpg"></A></P></DIV><A 
+href="http://www.java-samples.com/testpapers/">
+<DIV class=headerphoto><BR>&nbsp;<BR>&nbsp;<BR>&nbsp;<BR>&nbsp;<BR>&nbsp;<BR>
+<SCRIPT type=text/javascript><!--
+                        google_ad_client = "pub-0422232599241478";
+                        /* java top adunit 728x15, created 4/10/09 */
+                        google_ad_slot = "9970225838";
+                        google_ad_width = 728;
+                        google_ad_height = 15;
+                        //-->
+                        </SCRIPT>
+
+<SCRIPT type=text/javascript src="">
+                        </SCRIPT>
+</DIV></A></DIV>
+<DIV id=menu>
+<UL>
+  <LI><A id=current href="http://www.java-samples.com/index.php">Home</A> </LI>
+  <LI><A href="http://qa.java-samples.com/questions/ask/">Ask a Question</A> 
+  </LI>
+  <LI><A href="http://jobs.java-samples.com/">Jobs</A> </LI>
+  <LI><A href="http://projects.java-samples.com/">Projects</A> </LI>
+  <LI><A href="http://qa.java-samples.com/">Forum</A> </LI>
+  <LI><A href="http://www.java-samples.com/submittutorial.php">Submit 
+  Tutorial</A> </LI>
+  <LI><A 
+  href="http://www.java-samples.com/showtutoriallist.php?category=all&amp;start=1">Latest 
+  Tutorials</A> </LI>
+  <LI><A title="Subscribe to my feed" 
+  href="http://feeds.feedburner.com/JavaSamples" type=application/rss+xml 
+  rel=alternate>Subscribe in a reader</A> </LI></UL>
+<P style="BACKGROUND-COLOR: #f3f0eb">
+<FORM id=cse-search-box action=http://www.java-samples.com/search.php><INPUT 
+name=cx value=partner-pub-0422232599241478:3739067690 type=hidden> <INPUT 
+name=cof value=FORID:10 type=hidden> <INPUT name=ie value=UTF-8 type=hidden> 
+<INPUT 
+style="BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; HEIGHT: 2.5em; BORDER-TOP: black 1px solid; BORDER-RIGHT: black 1px solid" 
+name=q size=100> <INPUT name=sa value=Search type=submit> </FORM>
+<SCRIPT type=text/javascript 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/brand.js"></SCRIPT>
+</P></DIV><!-- content-wrap starts here -->
+<DIV id=content-wrap>
+<DIV id=content><!-- main starts here -->
+<DIV id=main>
+<DIV class=post>
+<H1><A 
+href="http://www.java-samples.com/showtutorial.php?tutorialid=306">wait(), 
+notify() and notifyAll() in Java - A tutorial</A></H1>
+<P>By: Jagan<!-- Viewed: 12650 times --> Emailed: 543 times Printed: 1125 times 
+&nbsp; <G:PLUSONE></G:PLUSONE></P>
+<P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>
+      <SCRIPT type=text/javascript><!--
+google_ad_client = "pub-0422232599241478";
+/* 336x280, new-java-tuttop created 12/6/08 */
+google_ad_slot = "2038559929";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</SCRIPT>
+
+      <SCRIPT type=text/javascript src="">
+</SCRIPT>
+    </TD>
+    <TD><B>Latest comments</B> 
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: Shyam - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37859">Thank 
+            you I have understo</A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: Damith - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37857">This 
+            is the coding that I</A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: marios - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37856">thank 
+            you for your excell</A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: jordan - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37855">Thanks 
+            for the tutorial. </A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: Michael - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37854">I 
+            used the script above, </A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: Srinath - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37847">thank 
+            you, this best for </A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: aMIT sURI - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37846">My 
+            Page URL- http://local</A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: ahmed - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37845">hola 
+            no funciona este</A></SMALL></TD></TR>
+        <TR>
+          <TD vAlign=top noWrap><SMALL>By: Debarupa - <A 
+            href="http://www.java-samples.com/showcomment.php?commentid=37844">Thanks 
+            so much for the 
+tu</A></SMALL></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<DIV style="FONT-FAMILY: Arial; COLOR: #000080; FONT-SIZE: 10pt">The use of the 
+implicit monitors in Java objects is powerful, but you can achieve a more subtle 
+level of control through inter-process communication. As you will see, this is 
+especially easy in Java. 
+<P>Multithreading replaces event loop programming by dividing your tasks into 
+discrete and logical units. Threads also provide a secondary benefit: they do 
+away with polling. Polling is usually implemented by a loop that is used to 
+check some condition repeatedly. Once the condition is true, appropriate action 
+is taken. This wastes CPU time. For example, consider the classic queuing 
+problem, where one thread is producing some data and another is consuming it. To 
+make the problem more interesting, suppose that the producer has to wait until 
+the consumer is finished before it generates more data. In a polling system, the 
+consumer would waste many CPU cycles while it <BR>waited for the producer to 
+produce. Once the producer was finished, it would start polling, wasting more 
+CPU cycles waiting for the consumer to finish, and so on. Clearly, this 
+situation is undesirable.</P>
+<P>To avoid polling, Java includes an elegant interrocess communication 
+mechanism via the <B>wait( )</B>, <B>notify( )</B>, and <B>notifyAll( ) 
+</B>methods. These methods are implemented as <B>final </B>methods in 
+<B>Object</B>, so all classes have them. All three methods can be called only 
+from within a <B>synchronized </B>method. Although conceptually advanced from a 
+computer science perspective, the rules for using these methods are actually 
+quite simple:</P>
+<UL>
+  <LI><B>wait( ) </B>tells the calling thread to give up the monitor and go to 
+  sleep until some other <BR>thread enters the same monitor and calls <B>notify( 
+  )</B>. 
+  <LI><B>notify( ) </B>wakes up the first thread that called <B>wait( ) </B>on 
+  the same object. 
+  <LI><B>notifyAll( ) </B>wakes up all the threads that called <B>wait( ) </B>on 
+  the same object. The <BR>highest priority thread will run first. </LI></UL>
+<P>These methods are declared within <B>Object</B>, as shown here:</P>
+<P>final void wait( ) throws InterruptedException <BR>final void notify( ) 
+<BR>final void notifyAll( )</P>
+<P>Additional forms of <B>wait( ) </B>exist that allow you to specify a period 
+of time to wait. The following sample program incorrectly implements a simple 
+form of the producer/consumer problem. It consists of four classes: <B>Q</B>, 
+the queue that you're trying to synchronize; <B>Producer</B>, the threaded 
+object that is producing queue entries; <B>Consumer</B>, the threaded object 
+that is consuming queue entries; and <B>PC</B>, the tiny class that creates the 
+single <B>Q</B>, <B>Producer</B>, and <B>Consumer</B>.</P><CODE>
+<P>// An incorrect implementation of a producer and consumer. <BR>class Q { 
+<BR>int n; <BR>synchronized int get() { <BR>System.out.println("Got: " + n); 
+<BR>return n; <BR>} <BR>synchronized void put(int n) { <BR>this.n = n; 
+<BR>System.out.println("Put: " + n); <BR>} <BR>}</P>
+<P>class Producer implements Runnable { <BR>Q q; <BR>Producer(Q q) { <BR>this.q 
+= q; <BR>new Thread(this, "Producer").start(); <BR>} <BR>public void run() { 
+<BR>int i = 0; <BR>while(true) { <BR>q.put(i++); <BR>} <BR>} <BR>}</P>
+<P>class Consumer implements Runnable { <BR>Q q; <BR>Consumer(Q q) { <BR>this.q 
+= q; <BR>new Thread(this, "Consumer").start(); <BR>} <BR>public void run() { 
+<BR>while(true) { <BR>q.get(); <BR>} <BR>} <BR>}</P>
+<P>class PC { <BR>public static void main(String args[]) { <BR>Q q = new Q(); 
+<BR>new Producer(q); <BR>new Consumer(q); <BR>System.out.println("Press 
+Control-C to stop."); <BR>} <BR>}</P></CODE>
+<P>Although the <B>put( ) </B>and <B>get( ) </B>methods on <B>Q </B>are 
+synchronized, nothing stops the producer from overrunning the consumer, nor will 
+anything stop the consumer from consuming the same queue value twice. Thus, you 
+get the erroneous output shown here (the exact output will vary with processor 
+speed and task load):</P>
+<P>Put: 1 <BR>Got: 1 <BR>Got: 1 <BR>Got: 1 <BR>Got: 1 <BR>Got: 1 <BR>Put: 2 
+<BR>Put: 3 <BR>Put: 4 <BR>Put: 5 <BR>Put: 6 <BR>Put: 7 <BR>Got: 7</P>
+<P>As you can see, after the producer put 1, the consumer started and got the 
+same 1 five times in a row. Then, the producer resumed and produced 2 through 7 
+without letting the consumer have a chance to consume them.</P>
+<P>The proper way to write this program in Java is to use <B>wait( ) </B>and 
+<B>notify( ) </B>to signal in both directions, as shown here:</P><CODE>
+<P>// A correct implementation of a producer and consumer. <BR>class Q { <BR>int 
+n; <BR>boolean valueSet = false; <BR>synchronized int get() { <BR>if(!valueSet) 
+<BR>try { <BR>wait(); <BR>} catch(InterruptedException e) { 
+<BR>System.out.println("InterruptedException caught"); <BR>} 
+<BR>System.out.println("Got: " + n); <BR>valueSet = false; <BR>notify(); 
+<BR>return n; <BR>} <BR>synchronized void put(int n) { <BR>if(valueSet) <BR>try 
+{ <BR>wait(); <BR>} catch(InterruptedException e) { 
+<BR>System.out.println("InterruptedException caught"); <BR>} <BR>this.n = n; 
+<BR>valueSet = true; <BR>System.out.println("Put: " + n); <BR>notify(); <BR>} 
+<BR>}</P>
+<P>class Producer implements Runnable { <BR>Q q; <BR>Producer(Q q) { <BR>this.q 
+= q; <BR>new Thread(this, "Producer").start(); <BR>} <BR>public void run() { 
+<BR>int i = 0; <BR>while(true) { <BR>q.put(i++); <BR>} <BR>} <BR>}</P>
+<P>class Consumer implements Runnable { <BR>Q q; <BR>Consumer(Q q) { <BR>this.q 
+= q; <BR>new Thread(this, "Consumer").start(); <BR>} <BR>public void run() { 
+<BR>while(true) { <BR>q.get(); <BR>} <BR>} <BR>}</P>
+<P>class PCFixed { <BR>public static void main(String args[]) { <BR>Q q = new 
+Q(); <BR>new Producer(q); <BR>new Consumer(q); <BR>System.out.println("Press 
+Control-C to stop."); <BR>} <BR>}</P></CODE>
+<P>Inside <B>get( )</B>, <B>wait( ) </B>is called. This causes its execution to 
+suspend until the <B>Producer </B>notifies you that some data is ready. When 
+this happens, execution inside <B>get( ) </B>resumes. After the data has been 
+obtained, <B>get( ) </B>calls <B>notify( )</B>. This tells <B>Producer </B>that 
+it is okay to put more data in the queue. Inside <B>put( )</B>, <B>wait( ) 
+</B>suspends execution until the <B>Consumer </B>has removed the item from the 
+queue. When execution resumes, the next item of data is put in the queue, and 
+<B>notify( ) </B>is called. This tells the <B>Consumer </B>that it should now 
+remove it.</P>
+<P>Here is some output from this program, which shows the clean synchronous 
+behavior:</P>
+<P>Put: 1 <BR>Got: 1 <BR>Put: 2 <BR>Got: 2 <BR>Put: 3 <BR>Got: 3 <BR>Put: 4 
+<BR>Got: 4 <BR>Put: 5 <BR>Got: 5</P>
+<P>This tutorial is an extract from the book "The complete Reference Java 2" by 
+Herbert Schildt</P><BR>
+<P><A href="http://www.java-samples.com/java/">Java Home</A> | <A 
+href="http://www.java-samples.com/showtitles.php?category=Java&amp;start=1">All 
+Java Tutorials</A> | <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Java&amp;start=1">Latest 
+Java Tutorials</A> </P><BR>
+<SCRIPT type=text/javascript><!--
+google_ad_client = "pub-0422232599241478";
+/* java top adunit 728x15, created 4/10/09 */
+google_ad_slot = "9970225838";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</SCRIPT>
+
+<SCRIPT type=text/javascript src="">
+</SCRIPT>
+
+<P><B>If this tutorial doesn't answer your question, and you have a specific 
+question, just ask an expert here. Post your question to get a direct 
+answer.</B><BR></P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><A href="http://qa.java-samples.com/questions/ask/"><IMG 
+      style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" 
+      src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/ask-a-question-long.png"></A><BR><A 
+      href="http://www.java-samples.com/foremailing.php?tutorialid=306"><IMG 
+      border=0 
+      src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/mail.gif" 
+      width=143 height=20></A><BR><A 
+      href="http://www.java-samples.com/forprinting.php?tutorialid=306"><IMG 
+      border=0 
+      src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/print.gif" 
+      width=181 height=30></A><BR><!-- AddThis Button BEGIN -->
+      <SCRIPT type=text/javascript>var addthis_pub="vilyams";</SCRIPT>
+      <A onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" 
+      onmouseout=addthis_close() onclick="return addthis_sendto()" 
+      href="http://www.addthis.com/bookmark.php?v=20"><IMG 
+      style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" 
+      alt="Bookmark and Share" 
+      src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/lg-share-en.gif" 
+      width=125 height=16></A>
+      <SCRIPT type=text/javascript 
+      src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/addthis_widget.js"></SCRIPT>
+       <!-- AddThis Button END --></TD>
+    <TD>
+      <SCRIPT type=text/javascript><!--
+google_ad_client = "ca-pub-0422232599241478";
+/* new-java-tut-bottom */
+google_ad_slot = "5387556847";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</SCRIPT>
+
+      <SCRIPT type=text/javascript src="">
+</SCRIPT>
+    </TD></TR></TBODY></TABLE><BR>
+<SCRIPT type=text/javascript><!--
+google_ad_client = "pub-0422232599241478";
+/* java top adunit 728x15, created 4/10/09 */
+google_ad_slot = "9970225838";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</SCRIPT>
+
+<SCRIPT type=text/javascript src="">
+</SCRIPT>
+
+<P class="post-footer align-right"><!-- AddThis Button BEGIN -->
+<SCRIPT type=text/javascript>var addthis_pub="vilyams";</SCRIPT>
+<A onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" 
+onmouseout=addthis_close() onclick="return addthis_sendto()" 
+href="http://www.addthis.com/bookmark.php?v=20"><IMG 
+style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" 
+alt="Bookmark and Share" 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/lg-share-en.gif" 
+width=125 height=16></A>
+<SCRIPT type=text/javascript 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/addthis_widget.js"></SCRIPT>
+ <!-- AddThis Button END --><SPAN class=date>2007-09-08</SPAN> <BR><BR></P>
+<H1>Comments(48)</H1><BR>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>1. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33369">View 
+      Comment</A><BR><BR><CODE>Thanks for the article. I got some clearance now. 
+      Thank you again.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://4paisa.blogspot.com/" rel=nofollow>Reddy</A> at 2008-03-15 
+      00:02:17</TD></TR>
+  <TR>
+    <TD vAlign=top>2. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33620">View 
+      Comment</A><BR><BR><CODE>nice article, many thanx :)</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Unknown</A> at 2008-10-16 
+      21:09:02</TD></TR>
+  <TR>
+    <TD vAlign=top>3. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33691">View 
+      Comment</A><BR><BR><CODE>very cool you said it! many thanks it's really 
+      cool 'n' clear</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>ArAsh</A> at 2008-12-11 
+      06:41:13</TD></TR>
+  <TR>
+    <TD vAlign=top>4. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33745">View 
+      Comment</A><BR><BR><CODE>thank you. it was very useful.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>ravindar</A> at 
+      2009-01-09 01:04:15</TD></TR>
+  <TR>
+    <TD vAlign=top>5. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33867">View 
+      Comment</A><BR><BR><CODE>Great job!<BR>Lot of things 
+      cleared...</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>alok</A> at 2009-03-18 
+      10:45:25</TD></TR>
+  <TR>
+    <TD vAlign=top>6. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=33965">View 
+      Comment</A><BR><BR><CODE>Good job!</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://public.grupoinnovant.com/" rel=nofollow>jgui</A> at 
+      2009-04-22 10:54:54</TD></TR>
+  <TR>
+    <TD vAlign=top>7. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34093">View 
+      Comment</A><BR><BR><CODE>i have clear that notify and wait<BR>but where i 
+      have used the notifyAll<BR>how can used and which situation we can used it 
+      <BR>so have still some clearty<BR><BR>thanks<BR>pp</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>pp</A> at 2009-06-29 
+      06:12:13</TD></TR>
+  <TR>
+    <TD vAlign=top>8. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34153">View 
+      Comment</A><BR><BR><CODE>notify does NOT wake up the first thread waiting. 
+      it wakes up an abitrary thread waiting. notifyAll is almost always better 
+      than notify. A thread woken up by wait still has to compete with all other 
+      threads that are trying to lock on the 
+      object.<BR><BR>cheers<BR>Armin</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Armin</A> at 2009-07-26 
+      07:25:09</TD></TR>
+  <TR>
+    <TD vAlign=top>9. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34257">View 
+      Comment</A><BR><BR><CODE>good example need some more explanation on notify 
+      all</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>prashant </A>at 
+      2009-09-08 19:29:54</TD></TR>
+  <TR>
+    <TD vAlign=top>10. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34267">View 
+      Comment</A><BR><BR><CODE>Good example...easy to read and 
+      understand...</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.codventure.com/" rel=nofollow>Codventure</A> at 
+      2009-09-11 00:07:06</TD></TR>
+  <TR>
+    <TD vAlign=top>11. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34321">View 
+      Comment</A><BR><BR><CODE>Its a nice article obviously. Can you put 
+      something about asserstion. Hope it will be such a nice tutorial like 
+      this.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://kowser.blogspot.com/" rel=nofollow>kowser</A> at 2009-10-06 
+      23:44:52</TD></TR>
+  <TR>
+    <TD vAlign=top>12. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34347">View 
+      Comment</A><BR><BR><CODE>Hi. Useful article. Thanks</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://thedevelopersinfo.wordpress.com/" rel=nofollow>sheff</A> at 
+      2009-10-16 12:44:39</TD></TR>
+  <TR>
+    <TD vAlign=top>13. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34431">View 
+      Comment</A><BR><BR><CODE>Great article. The simple example used easily 
+      makes the concept clear.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Nikhil</A> at 2009-11-13 
+      08:38:41</TD></TR>
+  <TR>
+    <TD vAlign=top>14. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34469">View 
+      Comment</A><BR><BR><CODE>Marvelous Explanation. The whole concept is clear 
+      to me now</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Rohit</A> at 2009-12-01 
+      19:43:14</TD></TR>
+  <TR>
+    <TD vAlign=top>15. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34484">View 
+      Comment</A><BR><BR><CODE>Excellent!!!!! Thanks</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>nimbostratue</A> at 
+      2009-12-09 13:07:09</TD></TR>
+  <TR>
+    <TD vAlign=top>16. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34523">View 
+      Comment</A><BR><BR><CODE>Good.understand</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Selva</A> at 2009-12-29 
+      23:27:29</TD></TR>
+  <TR>
+    <TD vAlign=top>17. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34637">View 
+      Comment</A><BR><BR><CODE>Very nice and easy to understand, keep it up 
+      !!<BR><BR>Cheers.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>claudiu</A> at 2010-02-07 
+      06:12:30</TD></TR>
+  <TR>
+    <TD vAlign=top>18. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34753">View 
+      Comment</A><BR><BR><CODE>is there a way to notify a specific 
+      thread?</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>bob</A> at 2010-03-23 
+      11:57:29</TD></TR>
+  <TR>
+    <TD vAlign=top>19. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34773">View 
+      Comment</A><BR><BR><CODE>Really a great article!<BR>I have some 
+      questions/suggestions:<BR>Shouldn't be the wait-calls be inside a loop to 
+      account for spurious wakeups? (see 
+      http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html#wait())<BR>Also, 
+      I would put the rest of the code after the wait() also into the try-block, 
+      because i wouldn't want it to be executed after an 
+      InterruptedException.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>ron</A> at 2010-03-30 
+      01:37:12</TD></TR>
+  <TR>
+    <TD vAlign=top>20. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34780">View 
+      Comment</A><BR><BR><CODE>Very good. I like this way. First provide quite 
+      wrong implementation and then correct it. Its really good example. 
+      Thanks!</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.fairlypopular.com/" rel=nofollow>NJ</A> at 2010-04-01 
+      23:27:44</TD></TR>
+  <TR>
+    <TD vAlign=top>21. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34839">View 
+      Comment</A><BR><BR><CODE>Very cool one, thanks, got the concept 
+      clear</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>black boot</A> at 
+      2010-04-18 08:20:20</TD></TR>
+  <TR>
+    <TD vAlign=top>22. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34853">View 
+      Comment</A><BR><BR><CODE>Does Wait() inside synchronized create a race 
+      condition?</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Aviator168</A> at 
+      2010-04-21 16:02:06</TD></TR>
+  <TR>
+    <TD vAlign=top>23. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34865">View 
+      Comment</A><BR><BR><CODE>Nice article, Thank you</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>kumar kasimala</A> at 
+      2010-04-26 21:09:25</TD></TR>
+  <TR>
+    <TD vAlign=top>24. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34960">View 
+      Comment</A><BR><BR><CODE>Very nice article.. thanks</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Basu</A> at 2010-05-29 
+      05:52:00</TD></TR>
+  <TR>
+    <TD vAlign=top>25. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=34998">View 
+      Comment</A><BR><BR><CODE>I have one doubt regarding this code,<BR>if the 
+      producer thread is already synchronized on 'this' how does the consumer 
+      can enter get method which is again synchronized on 'this'. <BR>And also 
+      in general i want to know why is wait(),notify() and notifyAll() are there 
+      in Object class.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Yellappa</A> at 
+      2010-06-11 05:49:15</TD></TR>
+  <TR>
+    <TD vAlign=top>26. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35002">View 
+      Comment</A><BR><BR><CODE>Great!</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://techmindviews.blogspot.com/" rel=nofollow>sunil</A> at 
+      2010-06-13 12:32:09</TD></TR>
+  <TR>
+    <TD vAlign=top>27. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35012">View 
+      Comment</A><BR><BR><CODE>Hello,<BR><BR>your solution is kinda 
+      overkill.<BR>When used correctly, notify and wait don't need workarounds 
+      such as valueSet.<BR><BR>Here's the improved 
+      version:<BR>----------------------<BR>package producer;<BR><BR>// A 
+      correct implementation of a producer and consumer.<BR>class Q {<BR>int 
+      n;<BR><BR>synchronized int get() {<BR>try {<BR>notify();<BR>wait();<BR>} 
+      catch (InterruptedException e) 
+      {<BR>System.out.println("InterruptedException 
+      caught");<BR>}<BR>System.out.println("Got: " + n);<BR>return 
+      n;<BR>}<BR><BR>synchronized void put(int n) {<BR>try 
+      {<BR>notify();<BR>wait();<BR>} catch (InterruptedException e) 
+      {<BR>System.out.println("InterruptedException caught");<BR>}<BR>this.n = 
+      n;<BR>System.out.println("Put: " + n);<BR>}<BR>}<BR><BR>public class 
+      Producer implements Runnable {<BR>Q q;<BR><BR>Producer(Q q) {<BR>this.q = 
+      q;<BR>new Thread(this, "Producer").start();<BR>}<BR><BR>public void run() 
+      {<BR>int i = 0;<BR>while (true) 
+      {<BR>q.put(i++);<BR>}<BR>}<BR>}<BR><BR>class Consumer implements Runnable 
+      {<BR>Q q;<BR><BR>Consumer(Q q) {<BR>this.q = q;<BR>new Thread(this, 
+      "Consumer").start();<BR>}<BR><BR>public void run() {<BR>while (true) 
+      {<BR>q.get();<BR>}<BR>}<BR>}<BR><BR>class PCFixed {<BR>public static void 
+      main(String args[]) {<BR>Q q = new Q();<BR>new Producer(q);<BR>new 
+      Consumer(q);<BR>System.out.println("Press Control-C to 
+      stop.");<BR>}<BR>}<BR><BR>-------------------------</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Hdm-Student</A> at 
+      2010-06-16 08:10:51</TD></TR>
+  <TR>
+    <TD vAlign=top>28. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35106">View 
+      Comment</A><BR><BR><CODE>Explanations and examples are more clear. I like 
+      it.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Rajkumar S</A> at 
+      2010-07-12 22:28:40</TD></TR>
+  <TR>
+    <TD vAlign=top>29. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35156">View 
+      Comment</A><BR><BR><CODE>27: What happens if the producer and the customer 
+      enterin the wait at same time? Deadlock? I think no protection against 
+      deadlock.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Spender</A> at 2010-07-25 
+      14:42:08</TD></TR>
+  <TR>
+    <TD vAlign=top>30. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35197">View 
+      Comment</A><BR><BR><CODE>Excellent Example to explain the 
+      functions</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>manish</A> at 2010-08-05 
+      03:10:43</TD></TR>
+  <TR>
+    <TD vAlign=top>31. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35248">View 
+      Comment</A><BR><BR><CODE>Thanks mate !!!<BR><BR>-- Anish 
+      Sneh</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Anish Sneh</A> at 
+      2010-08-18 07:42:56</TD></TR>
+  <TR>
+    <TD vAlign=top>32. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35827">View 
+      Comment</A><BR><BR><CODE>Thank you ... was very helpfull indeed 
+      !!</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Avinav</A> at 2011-02-09 
+      15:46:37</TD></TR>
+  <TR>
+    <TD vAlign=top>33. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35853">View 
+      Comment</A><BR><BR><CODE>This program little hard to understand ..please 
+      give in simple !</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>sarav</A> at 2011-02-17 
+      05:02:46</TD></TR>
+  <TR>
+    <TD vAlign=top>34. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=35952">View 
+      Comment</A><BR><BR><CODE>Nice Article, but these concepts are pretty 
+      confusing and sometimes hard to implement.<BR><BR>Good attempt 
+      though.<BR><BR>Goldest</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Goldest</A> at 2011-03-18 
+      01:50:50</TD></TR>
+  <TR>
+    <TD vAlign=top>35. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36117">View 
+      Comment</A><BR><BR><CODE>nice article... got th topic 
+      clearly</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>praba</A> at 2011-05-09 
+      23:29:26</TD></TR>
+  <TR>
+    <TD vAlign=top>36. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36128">View 
+      Comment</A><BR><BR><CODE>how to send data one pc to another with java 
+      programming????</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>usman</A> at 2011-05-14 
+      01:31:31</TD></TR>
+  <TR>
+    <TD vAlign=top>37. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36198">View 
+      Comment</A><BR><BR><CODE>Thanks alot. Really great and simple 
+      example!</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>leo</A> at 2011-06-06 
+      13:58:32</TD></TR>
+  <TR>
+    <TD vAlign=top>38. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36319">View 
+      Comment</A><BR><BR><CODE>Code indentation would help!...</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>James</A> at 2011-06-30 
+      04:54:51</TD></TR>
+  <TR>
+    <TD vAlign=top>39. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36445">View 
+      Comment</A><BR><BR><CODE>yes 29 you are correct! 27's example is prone to 
+      a deadlock.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>sameendra</A> at 
+      2011-07-24 11:55:54</TD></TR>
+  <TR>
+    <TD vAlign=top>40. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36554">View 
+      Comment</A><BR><BR><CODE>why 27's example is prone to a deadlock ? when 
+      producer and customer enter waiting status at the same time 
+      ?</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>kaka</A> at 2011-08-14 
+      00:59:41</TD></TR>
+  <TR>
+    <TD vAlign=top>41. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36597">View 
+      Comment</A><BR><BR><CODE>Thank you for such a article. It is extreamly 
+      nice article to clear the doubt of the Thread, with the help of producer 
+      and consumer</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Ravi</A> at 2011-08-23 
+      10:04:14</TD></TR>
+  <TR>
+    <TD vAlign=top>42. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=36697">View 
+      Comment</A><BR><BR><CODE>I could not understand, anyone having an easier 
+      example with simple explanation then plz tell.....</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>aatish</A> at 2011-09-14 
+      09:52:28</TD></TR>
+  <TR>
+    <TD vAlign=top>43. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37030">View 
+      Comment</A><BR><BR><CODE>why r there these methods in Object class not in 
+      Thread class?</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>santosh</A> at 2011-11-16 
+      06:58:06</TD></TR>
+  <TR>
+    <TD vAlign=top>44. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37113">View 
+      Comment</A><BR><BR><CODE>hope this may help u<BR><BR>class 
+      product<BR>{<BR>int contents=0;<BR>boolean available = 
+      false;<BR>synchronized int get()<BR>{<BR>if(available==false) <BR>try<BR>{ 
+      <BR>wait();<BR>}<BR>catch(InterruptedException 
+      e)<BR>{<BR>System.out.println("InterruptException 
+      caught");<BR>}<BR><BR>System.out.println("consume:"+contents);<BR>System.out.println("hello");<BR>available=false;<BR>notifyAll();<BR>return 
+      contents;<BR>}<BR>synchronized void put(int 
+      num)<BR>{<BR>if(available==true)<BR>try<BR>{<BR>wait();<BR>}<BR>catch(InterruptedException 
+      e)<BR>{<BR>System.out.println("InterruptedException 
+      caught");<BR>}<BR>contents=num;<BR>System.out.println("produce:"+contents);<BR>System.out.println("Welcome");<BR>notifyAll();<BR>}<BR>}<BR>class 
+      producer extends Thread<BR>{<BR>product p;<BR>producer(product 
+      p)<BR>{<BR>this.p=p;<BR>this.start();<BR>}<BR>public void 
+      run()<BR>{<BR>int i=0;<BR>p.put(++i);<BR>}<BR>}<BR>class consumer extends 
+      Thread<BR>{<BR>product p;<BR>consumer(product 
+      p)<BR>{<BR>this.p=p;<BR>this.start();<BR>}<BR>public void run()<BR>{ 
+      <BR>p.get(); <BR>}<BR>}<BR>public class interthreadcon <BR>{<BR>public 
+      static void main(String[] args)<BR>{<BR>product s = new product();<BR>new 
+      producer(s);<BR>new consumer(s);<BR>}<BR>}</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>princess</A> at 
+      2011-11-30 12:11:57</TD></TR>
+  <TR>
+    <TD vAlign=top>45. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37153">View 
+      Comment</A><BR><BR><CODE>I have a question. So here I have a progress bar, 
+      but it seems to not move. I needed a way to wait sixty seconds before it 
+      added a number to the value, so I went to this. I have no idea how to use 
+      this, and thought I was using it correctly. The compiler seems to 
+      disagree. Here's my progress bar code:<BR><BR>//makes the progress 
+      bar<BR>JProgressBar Bar = new JProgressBar(0, 15);<BR>int a = 0;<BR>while 
+      (a &lt;15) {<BR>a = a + 
+      1;<BR>Bar.wait(60000);<BR>notify();<BR>}<BR>Bar.setValue(a);<BR>Bar.setStringPainted(true);<BR>Bar.setBounds(700, 
+      75, 206, 
+      40);<BR>Bar.setBorder(BorderFactory.createRaisedBevelBorder());<BR>contentPane.add( 
+      Bar );<BR><BR>what i'm focusing on is the while loop. inside that, the 
+      compiler is complaining about the wait line. Apparently I am using this 
+      wrong. How do I use it right?</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Nick</A> at 2011-12-06 
+      05:10:19</TD></TR>
+  <TR>
+    <TD vAlign=top>46. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37237">View 
+      Comment</A><BR><BR><CODE>Nice article. Really helpful in understanding the 
+      functionality &amp; usage of wait(), notify() and notifyAll() 
+      methods.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Sundar</A> at 2011-12-18 
+      11:15:07</TD></TR>
+  <TR>
+    <TD vAlign=top>47. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37333">View 
+      Comment</A><BR><BR><CODE>Excellent example Jagan. By the way I have a 
+      question.<BR>isn't the synchronized get() and synchronized put(...) 
+      methods will cause deadlock? Should they be synchronized? Can you explain 
+      why they need to be synchronized?? <BR>Thanks</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Shrihas</A> at 2012-01-07 
+      14:12:48</TD></TR>
+  <TR>
+    <TD vAlign=top>48. </TD>
+    <TD><A 
+      href="http://www.java-samples.com/showcomment.php?commentid=37424">View 
+      Comment</A><BR><BR><CODE>29. It is not a deadlock. What will actually 
+      happen is that consumer might start first and consume something, that has 
+      not been produced yet. That's why 27's code is not 
+      correct.</CODE><BR><BR><A 
+      href="http://www.java-samples.com/showtutorial.php?tutorialid=306">View 
+      Tutorial</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: <A 
+      href="http://www.java-samples.com/" rel=nofollow>Sasha</A> at 2012-01-24 
+      14:34:03</TD></TR></TBODY></TABLE>
+<FORM method=post name=comment action=addopinion.php>Your name 
+(required):<BR><INPUT id=AuthorName class=form name=AuthorName 
+size=50><BR><BR>Your email(required, will not be shown to the public):<BR><INPUT 
+id=AuthorEmail class=form name=AuthorEmail size=50><BR><BR>Your sites URL 
+(optional):<BR><INPUT id=AuthorURL class=form name=AuthorURL 
+value=http://www.java-samples.com size=50><BR><BR>Your comments:<BR><TEXTAREA cols=39 rows=8 name=AuthorComments></TEXTAREA><BR><BR><INPUT 
+name=tutorialid value=306 type=hidden><BR>
+<SCRIPT type=text/javascript 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/challenge.js"></SCRIPT>
+<NOSCRIPT></NOSCRIPT><BR><INPUT title="Add Your Comments" alt="Add Your Comments" value="  Add Your Comments  " type=submit> 
+<BR></FORM></DIV>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="50%"><B>More Tutorials by Jagan</B> 
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=669"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Importing a Certificate for the CA example 
+            using keytool in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=648"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>The if-then-else Statement in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=626"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>WHERE Clauses in SQL</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=612"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>The TryCatchFinally Interface in 
+            JSP</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=595"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>assert() Function Example program in 
+            C</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=583"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Guidelines for Struts Application 
+            Development</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=562"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using printf function in 
+C</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=530"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>File Inclusion in C</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=516"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using Multiple Message Resource Bundles in 
+            Struts</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=507"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>While and For Loops in C</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=488"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Arrays sample program in 
+C</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=473"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Controlling Page Navigation in JSF - Static 
+            and Dynamic Navigation</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=458"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using cout.fill() in C++</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=441"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Types of Profiles in J2ME</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=423"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>DateField sample program in 
+          J2ME</FONT></A></B></TD></TR></TBODY></TABLE></TD>
+    <TD vAlign=top width="50%"><B>More Tutorials in Java</B> 
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1588"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Save/Write/Read image file from/to a database 
+            using Java program</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1534"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Convert numbers to word as per Indian number 
+            system in java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1369"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Bubble Sort in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1360"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Insert, Delete, Search, Print an int Array in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1359"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Insert, Delete, Search, Print an int Array in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1358"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Palindrome String in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1343"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>HTTPS Java - URL Connection program. Using 
+            HttpsURLConnection</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1323"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Get user input in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1300"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Write to a file in Java - Sample 
+            Program</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1299"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Read a file line by line in Java - Sample 
+            Program</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1298"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Iterate a List in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1297"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>String Array in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1296"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Download JDK</FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1293"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>LinkedList in Java </FONT></A></B></TD></TR>
+        <TR>
+          <TD vAlign=top><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=1214"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Steps in using verisign certificate with 
+            Glassfish 
+appserver</FONT></A></B></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><A 
+href="http://www.java-samples.com/showtutoriallist.php?category=all&amp;start=1"><FONT 
+style="LINE-HEIGHT: 14px; FONT-SIZE: 14px" color=#003366 
+face=arial,sans-serif>More Latest News</FONT></A> <IFRAME height=280 
+marginHeight=0 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/sh088.htm" 
+frameBorder=0 width=336 allowTransparency marginWidth=0 scrolling=no></IFRAME>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="50%"><B>Most Viewed Articles</B> (in Java ) 
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=234"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to use ArrayList in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=369"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>HashMap example in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=235"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to use Iterator in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=152"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>XML and Java - Parsing XML using Java 
+            Tutorial</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=226"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using substring( ) in 
+Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=288"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Abstract classes in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=392"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>FileReader and FileWriter example program in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=225"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>indexOf( ) and lastIndexOf( ) in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=306"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>wait(), notify() and notifyAll() in Java - A 
+            tutorial</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=236"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using StringTokenizer in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=220"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>compareTo( ) in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=375"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Hashtable example in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=22"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to Send SMS using Java Program (full code 
+            sample included)</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=287"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Method Overriding in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=284"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Method Overloading (function overloading) in 
+            Java</FONT></A></B></TD></TR></TBODY></TABLE></TD>
+    <TD vAlign=top width="50%"><B>Most Emailed Articles</B> (in Java) 
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=27"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Components of program</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=22"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to Send SMS using Java Program (full code 
+            sample included)</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=152"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>XML and Java - Parsing XML using Java 
+            Tutorial</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=234"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to use ArrayList in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=26"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Why java is important to the 
+            Internet</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=392"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>FileReader and FileWriter example program in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=284"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Method Overloading (function overloading) in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=151"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Recursion in java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=235"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>How to use Iterator in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=8"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Execute system commands in a Java 
+            Program</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=369"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>HashMap example in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=287"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Method Overriding in Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=236"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>Using StringTokenizer in 
+        Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=225"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>indexOf( ) and lastIndexOf( ) in 
+            Java</FONT></A></B></TD></TR>
+        <TR>
+          <TD><B><A 
+            href="http://www.java-samples.com/showtutorial.php?tutorialid=306"><FONT 
+            style="LINE-HEIGHT: 14px; FONT-SIZE: 11px" color=#003366 
+            face=arial,sans-serif>wait(), notify() and notifyAll() in Java - A 
+            tutorial</FONT></A></B></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- main ends here --></DIV><!-- content-wrap ends here --></DIV><!-- sidebar starts here --><!-- sidebar starts here -->
+<DIV id=sidebar>
+<DIV class=sidebox><!--<h1 class="clear">Knowledgebase on</h1>-->
+<UL class=sidemenu>
+  <LI><A href="http://www.java-samples.com/testpapers/">Test Papers</A> 
+  <LI><A href="http://www.java-samples.com/android/">Android</A> 
+  <LI><A href="http://www.java-samples.com/ajax/">AJAX</A> 
+  <LI><A href="http://www.java-samples.com/asp.net/">ASP.net</A> 
+  <LI><A href="http://www.java-samples.com/c/">C</A> 
+  <LI><A href="http://www.java-samples.com/cocoa/">Cocoa</A> 
+  <LI><A href="http://www.java-samples.com/c++/">C++</A> 
+  <LI><A href="http://www.java-samples.com/csharp/">C#</A> 
+  <LI><A href="http://www.java-samples.com/java/">Java</A> 
+  <LI><A href="http://www.java-samples.com/javascript/">Javascript</A> 
+  <LI><A href="http://www.java-samples.com/jsf/">JSF</A> 
+  <LI><A href="http://www.java-samples.com/jsp/">JSP</A> 
+  <LI><A href="http://www.java-samples.com/j2me/">J2ME</A> 
+  <LI><A href="http://www.java-samples.com/java-beans/">Java Beans</A> 
+  <LI><A href="http://www.java-samples.com/ejb/">EJB</A> 
+  <LI><A href="http://www.java-samples.com/jdbc/">JDBC</A> 
+  <LI><A href="http://www.java-samples.com/linux/">Linux</A> 
+  <LI><A href="http://www.java-samples.com/macos/">Mac OS X</A> 
+  <LI><A href="http://www.java-samples.com/iphone/">iPhone</A> 
+  <LI><A href="http://www.java-samples.com/mysql/">MySQL</A> 
+  <LI><A href="http://www.java-samples.com/office365/">Office 365</A> 
+  <LI><A href="http://www.java-samples.com/perl/">Perl</A> 
+  <LI><A href="http://www.java-samples.com/php/">PHP</A> 
+  <LI><A href="http://www.java-samples.com/python/">Python</A> 
+  <LI><A href="http://www.java-samples.com/ruby/">Ruby</A> 
+  <LI><A href="http://www.java-samples.com/vb.net/">VB.net</A> 
+  <LI><A href="http://www.java-samples.com/hibernate/">Hibernate</A> 
+  <LI><A href="http://www.java-samples.com/struts/">Struts</A> 
+  <LI><A href="http://www.java-samples.com/sap/">SAP</A> 
+  <LI><A href="http://www.java-samples.com/xml/">XML</A> 
+  <LI><A href="http://projects.java-samples.com/">Projects</A> 
+  <LI><A href="http://www.java-samples.com/trends/">Trends</A> 
+  <LI><A href="http://www.java-samples.com/certification/">Certification</A> 
+  <LI><A href="http://www.java-samples.com/interview/">Interview</A> 
+  <LI><A href="http://www.java-samples.com/sitemap.php">Site Map</A> 
+  <LI><A href="mailto:williams@java-samples.com">Contact Us</A> 
+  <LI><A href="http://qa.java-samples.com/">Forum</A> </LI></UL></DIV>
+<DIV class=sidebox>
+<H1 class=clear>Related Links</H1>
+<SCRIPT type=text/javascript><!--
+google_ad_client = "pub-0422232599241478";
+/* 160x600, created 6/15/10 js-vert-tutorial */
+google_ad_slot = "1555829429";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</SCRIPT>
+
+<SCRIPT type=text/javascript src="">
+</SCRIPT>
+</DIV><IFRAME 
+style="BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; WIDTH: 185px; HEIGHT: 450px; OVERFLOW: hidden; BORDER-TOP: medium none; BORDER-RIGHT: medium none" 
+src="wait(),%20notify()%20and%20notifyAll()%20in%20Java%20-%20A%20tutorial_files/fastbutton.htm" 
+frameBorder=0 allowTransparency scrolling=no></IFRAME>
+<P>Tutorial Archive: <A 
+href="http://www.java-samples.com/showtitles.php?category=trends&amp;start=1">Trends</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Android&amp;start=1">Android</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=AJAX&amp;start=1">AJAX</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Asp&amp;start=1">ASP.net</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=C&amp;start=1">C</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Cocoa&amp;start=1">Cocoa</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=C%2B%2B&amp;start=1">C++</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Csharp&amp;start=1">C#</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=EJB&amp;start=1">EJB</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Java&amp;start=1">Java</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Certification&amp;start=1">Certification</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Interview&amp;start=1">Interview</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=iPhone&amp;start=1">iPhone</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=JSF&amp;start=1">Javascript</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Javascript&amp;start=1">JSF</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=JSP&amp;start=1">JSP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Java Beans&amp;start=1">Java 
+Beans</A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=J2ME&amp;start=1">J2ME</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=JDBC&amp;start=1">JDBC</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=linux&amp;start=1">Linux</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=macos&amp;start=1">Mac 
+OS X</A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=MySQL&amp;start=1">MySQL</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Perl&amp;start=1">Perl</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=PHP&amp;start=1">PHP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Python&amp;start=1">Python</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=ruby&amp;start=1">Ruby</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=SAP&amp;start=1">SAP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=VB.net&amp;start=1">VB.net</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=EJB&amp;start=1">EJB</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Struts&amp;start=1">Struts</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=XML&amp;start=1">XML</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtitles.php?category=Office365&amp;start=1">Office 
+365</A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Hibernate&amp;start=1">Hibernate</A> 
+</P>
+<P>Latest Tutorials on: <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=trends&amp;start=1">Trends</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Android&amp;start=1">Android</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=AJAX&amp;start=1">AJAX</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Asp&amp;start=1">ASP.net</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=C&amp;start=1">C</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Cocoa&amp;start=1">Cocoa</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=C%2B%2B&amp;start=1">C++</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Csharp&amp;start=1">C#</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=EJB&amp;start=1">EJB</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Java&amp;start=1">Java</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Certification&amp;start=1">Certification</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Interview&amp;start=1">Interview</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=iPhone&amp;start=1">iPhone</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Javascript&amp;start=1">Javascript</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JSF&amp;start=1">JSF</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JSP&amp;start=1">JSP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Java Beans&amp;start=1">Java 
+Beans</A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=J2ME&amp;start=1">J2ME</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JDBC&amp;start=1">JDBC</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=linux&amp;start=1">Linux</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=macos&amp;start=1">Mac 
+OS X</A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=MySQL&amp;start=1">MySQL</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Perl&amp;start=1">Perl</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=PHP&amp;start=1">PHP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Python&amp;start=1">Python</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=ruby&amp;start=1">Ruby</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=SAP&amp;start=1">SAP</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=VB.net&amp;start=1">VB.net</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=EJB&amp;start=1">EJB</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Struts&amp;start=1">Struts</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=XML&amp;start=1">Struts</A>&nbsp; 
+<A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Office365&amp;start=1">Office 
+365</A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Hibernate&amp;start=1">Hibernate</A> 
+</P>
+<DIV class=sidebox>
+<H1>Get tutorials direct to your email:</H1>
+<FORM 
+style="BORDER-BOTTOM: #ccc 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #ccc 1px solid; PADDING-BOTTOM: 3px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid; PADDING-TOP: 3px" 
+onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2433723', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true" 
+method=post action=http://www.feedburner.com/fb/a/emailverify 
+target=popupwindow><INPUT style="WIDTH: 140px" name=email><INPUT name=url 
+value=http://feeds.feedburner.com/~e?ffid=2433723 type=hidden><INPUT name=title 
+value="Java-Samples.com - Programming Tutorials, articles and code samples" 
+type=hidden><INPUT name=loc value=en_US type=hidden><INPUT value=Subscribe type=submit> <!--<p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p>--></FORM><BR><BR></DIV>
+<DIV class=sidebox>
+<SCRIPT type=text/javascript>
+clicksor_enable_adhere = false;
+//default banner house ad url 
+clicksor_default_url = '';
+clicksor_banner_border = '#f9f9f9'; clicksor_banner_ad_bg = '#FFFFFF';
+clicksor_banner_link_color = '#aa0039'; clicksor_banner_text_color = '#666666';
+clicksor_banner_image_banner = true; clicksor_banner_text_banner = true;
+clicksor_layer_border_color = '';
+clicksor_layer_ad_bg = ''; clicksor_layer_ad_link_color = '';
+clicksor_layer_ad_text_color = ''; clicksor_text_link_bg = '';
+clicksor_text_link_color = ''; clicksor_enable_text_link = false;
+</SCRIPT>
+
+<SCRIPT type=text/javascript src=""></SCRIPT>
+<NOSCRIPT></NOSCRIPT></DIV></DIV></DIV>
+<DIV id=footer>
+<DIV>
+<P>© 2012 <STRONG>Java-samples.com</STRONG> 
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><FONT color=#ffffff>Tutorial Archive: </FONT><A 
+href="http://www.java-samples.com/testpapers/"><FONT color=#ffffff>Test 
+Papers</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=trends&amp;start=1"><FONT 
+color=#ffffff>Trends</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Android&amp;start=1"><FONT 
+color=#ffffff>Android</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=AJAX&amp;start=1"><FONT 
+color=#ffffff>AJAX</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Asp&amp;start=1"><FONT 
+color=#ffffff>ASP.net</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=C&amp;start=1"><FONT 
+color=#ffffff>C</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Cocoa&amp;start=1"><FONT 
+color=#ffffff>Cocoa</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=C%2B%2B&amp;start=1"><FONT 
+color=#ffffff>C++</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Csharp&amp;start=1"><FONT 
+color=#ffffff>C#</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=EJB&amp;start=1"><FONT 
+color=#ffffff>EJB</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Java&amp;start=1"><FONT 
+color=#ffffff>Java</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Certification&amp;start=1"><FONT 
+color=#ffffff>Certification</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Interview&amp;start=1"><FONT 
+color=#ffffff>Interview</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=iPhone&amp;start=1"><FONT 
+color=#ffffff>iPhone</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=JSF&amp;start=1"><FONT 
+color=#ffffff>Javascript</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Javascript&amp;start=1"><FONT 
+color=#ffffff>JSF</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=JSP&amp;start=1"><FONT 
+color=#ffffff>JSP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Java Beans&amp;start=1"><FONT 
+color=#ffffff>Java Beans</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=J2ME&amp;start=1"><FONT 
+color=#ffffff>J2ME</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=JDBC&amp;start=1"><FONT 
+color=#ffffff>JDBC</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=linux&amp;start=1"><FONT 
+color=#ffffff>Linux</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=macos&amp;start=1"><FONT 
+color=#ffffff>Mac OS X</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=MySQL&amp;start=1"><FONT 
+color=#ffffff>MySQL</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Perl&amp;start=1"><FONT 
+color=#ffffff>Perl</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=PHP&amp;start=1"><FONT 
+color=#ffffff>PHP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Python&amp;start=1"><FONT 
+color=#ffffff>Python</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=ruby&amp;start=1"><FONT 
+color=#ffffff>Ruby</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=VB.net&amp;start=1"><FONT 
+color=#ffffff>VB.net</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Struts&amp;start=1"><FONT 
+color=#ffffff>Struts</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=SAP&amp;start=1"><FONT 
+color=#ffffff>SAP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=XML&amp;start=1"><FONT 
+color=#ffffff>XML</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Office365&amp;start=1"><FONT 
+color=#ffffff>Office 365</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtitles.php?category=Hibernate&amp;start=1"><FONT 
+color=#ffffff>Hibernate</FONT></A> </P>
+<P><FONT color=#ffffff>Latest Tutorials on: </FONT><A 
+href="http://www.java-samples.com/showtutoriallist.php?category=trends&amp;start=1"><FONT 
+color=#ffffff>Trends</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Android&amp;start=1"><FONT 
+color=#ffffff>Android</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=AJAX&amp;start=1"><FONT 
+color=#ffffff>AJAX</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Asp&amp;start=1"><FONT 
+color=#ffffff>ASP.net</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=C&amp;start=1"><FONT 
+color=#ffffff>C</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Cocoa&amp;start=1"><FONT 
+color=#ffffff>Cocoa</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=C%2B%2B&amp;start=1"><FONT 
+color=#ffffff>C++</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Csharp&amp;start=1"><FONT 
+color=#ffffff>C#</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=EJB&amp;start=1"><FONT 
+color=#ffffff>EJB</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Java&amp;start=1"><FONT 
+color=#ffffff>Java</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Certification&amp;start=1"><FONT 
+color=#ffffff>Certification</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Interview&amp;start=1"><FONT 
+color=#ffffff>Interview</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=iPhone&amp;start=1"><FONT 
+color=#ffffff>iPhone</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Javascript&amp;start=1"><FONT 
+color=#ffffff>JavaScript</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JSF&amp;start=1"><FONT 
+color=#ffffff>JSF</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JSP&amp;start=1"><FONT 
+color=#ffffff>JSP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Java Beans&amp;start=1"><FONT 
+color=#ffffff>Java Beans</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=J2ME&amp;start=1"><FONT 
+color=#ffffff>J2ME</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=JDBC&amp;start=1"><FONT 
+color=#ffffff>JDBC</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=linux&amp;start=1"><FONT 
+color=#ffffff>Linux</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=macos&amp;start=1"><FONT 
+color=#ffffff>Mac OS X</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=MySQL&amp;start=1"><FONT 
+color=#ffffff>MySQL</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Perl&amp;start=1"><FONT 
+color=#ffffff>Perl</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=PHP&amp;start=1"><FONT 
+color=#ffffff>PHP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Python&amp;start=1"><FONT 
+color=#ffffff>Python</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=ruby&amp;start=1"><FONT 
+color=#ffffff>Ruby</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=VB.net&amp;start=1"><FONT 
+color=#ffffff>VB.net</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=SAP&amp;start=1"><FONT 
+color=#ffffff>SAP</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Struts&amp;start=1"><FONT 
+color=#ffffff>Struts</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=XML&amp;start=1"><FONT 
+color=#ffffff>XML</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Office365&amp;start=1"><FONT 
+color=#ffffff>Office 365</FONT></A>&nbsp; <A 
+href="http://www.java-samples.com/showtutoriallist.php?category=Hibernate&amp;start=1"><FONT 
+color=#ffffff>Hibernate</FONT></A> </P>
+<P></P></DIV>
+<SCRIPT type=text/javascript>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+var pageTracker = _gat._getTracker("UA-3939412-1");
+pageTracker._trackPageview();
+</SCRIPT>
+</DIV><!-- wrap ends here --></DIV></DIV></BODY></HTML>
