@@ -1,0 +1,25 @@
+package com.advance.hw;
+import java.util.Scanner;
+
+public class Main {
+    public static void leap_year(){
+
+        System.out.println("A program that recognizes leap year or not");
+        Scanner input = new Scanner(System.in);
+        int input_year_num = input.nextInt();
+
+        if ((input_year_num % 4 == 0) && input_year_num % 100 != 0)
+        {
+            System.out.println(" leap year");
+        }
+        else if ((input_year_num % 4 == 0) && (input_year_num % 100 == 0) && (input_year_num % 400 == 0))
+        {
+            System.out.println(" leap year");
+        }
+        else
+        {
+            System.out.println("not a leap year");
+        }
+    }
+
+}
