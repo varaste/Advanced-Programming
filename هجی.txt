@@ -70,7 +70,7 @@ public class English {
         DecimalFormat df = new DecimalFormat(mask);
         snumber = df.format(number);
 
-        // XXXnnnnnnnnn
+        
         int billions = Integer.parseInt(snumber.substring(0,3));
         // nnnXXXnnnnnn
         int millions  = Integer.parseInt(snumber.substring(3,6));
